@@ -77,6 +77,28 @@ app.post('/api/notes', (request, response) => {
 
 
 })
+app.put('/api/notes/:id', (request, response) => {
+    console.log("notes before change", notes)
+    const body = request.body;
+    const id = Number(request.params.id);
+
+    if (!body.content) {
+        return response.status(400).json({
+            error: "content is missing"
+        })
+    }
+
+    const notesss = body
+    // console.log(`Initial note is`, note)
+    // console.log("Note after change :", noteToChange)
+    // console.log(typeof (note.id))
+    notes.map(note => note.id !== id ? note : notesss)
+    response.json(notesss)
+    // console.log("notes after change", notes)
+
+
+
+})
 const port = 3011;
 app.listen(port, () => {
     console.log(`server running on http://localhost:${port}`)
