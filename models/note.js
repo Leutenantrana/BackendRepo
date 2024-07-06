@@ -1,6 +1,6 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
-mongoose.set("strickQuery", false)
+// mongoose.set("strickQuery", false)
 const url = process.env.MONGODB_URL
 console.log("Connecting to", url)
 
@@ -17,7 +17,7 @@ const noteSchema = new mongoose.Schema({
     important: Boolean,
 })
 
-noteScheme.set('toJSON', {
+noteSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
@@ -25,4 +25,4 @@ noteScheme.set('toJSON', {
     }
 })
 
-module.export = mongoose.model('Note', noteSchema)
+module.exports = mongoose.model('Note', noteSchema)
