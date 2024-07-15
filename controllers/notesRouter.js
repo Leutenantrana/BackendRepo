@@ -16,16 +16,16 @@ const getTokenFrom = request => {
     return null
 }
 
-notesRouter.get('/', async (request, response,) => {
+notesRouter.get('/', async(request, response, ) => {
     const notes = await Note.find({}).populate('user', { username: 1, name: 1 })
     response.json(notes)
-    // This is conventional way of handling asyncronous operations 
-    // Note.find({})
-    //     .then(notes => {
-    //         response.json(notes)
-    //     })
+        // This is conventional way of handling asyncronous operations 
+        // Note.find({})
+        //     .then(notes => {
+        //         response.json(notes)
+        //     })
 })
-notesRouter.get('/:id', async (request, response, next) => {
+notesRouter.get('/:id', async(request, response, next) => {
     const { id } = request.params;
     if (!isValidObjectId(id)) {
         return response.status(400).send({ error: 'malformatted id' });
@@ -43,7 +43,7 @@ notesRouter.get('/:id', async (request, response, next) => {
 
     }
 })
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async(request, response, next) => {
     const body = request.body
     const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
     if (!decodedToken.id) {
@@ -70,11 +70,11 @@ notesRouter.post('/', async (request, response, next) => {
 
 })
 
-notesRouter.delete('/:id', async (request, response, next) => {
+notesRouter.delete('/:id', async(request, response, next) => {
 
     try {
         await Note.findByIdAndDelete(request.params.id)
-        response.send(204).end()
+        response.status(204).end()
     } catch (error) {
         console.error(error)
     }
