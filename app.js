@@ -5,8 +5,6 @@ const cors = require('cors')
 const notesRouter = require('./controllers/notesRouter')
 const usersRouter = require('./controllers/usersRouter')
 const loginRouter = require('./controllers/loginRouter')
-const logger = require('./utils/logger')
-const config = require('./utils/config')
 const middlewares = require('./utils/middlewares')
 
 connectDb()
